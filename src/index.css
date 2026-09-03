@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+
+  /* BookNest palette (from mockup) */
+  --color-sky: #45c6f2;        /* page background */
+  --color-sky-deep: #29b9e8;   /* accent: buttons, pills, icons */
+  --color-sky-soft: #e6f8fe;   /* pale accent fills */
+  --color-ink: #3a4256;        /* headings */
+  --color-ink-soft: #9aa3b5;   /* secondary text */
+  --color-card: #ffffff;
+  --color-line: #eef1f6;
+
+  --radius-blob: 1.75rem;
+
+  --shadow-card: 0 10px 30px -8px rgb(41 185 232 / 0.15);
+  --shadow-float: 0 24px 60px -12px rgb(0 60 90 / 0.25);
+}
+
+/* Dark mode via .dark on <html> */
+.dark {
+  --color-sky: #0d1a26;
+  --color-sky-soft: #16283a;
+  --color-ink: #e8edf5;
+  --color-ink-soft: #8b96ab;
+  --color-card: #13202e;
+  --color-line: #223345;
+  --shadow-card: 0 10px 30px -8px rgb(0 0 0 / 0.4);
+  --shadow-float: 0 24px 60px -12px rgb(0 0 0 / 0.6);
+}
+
+body {
+  background-color: var(--color-sky);
+  font-family: var(--font-sans);
+}
+
+/* thin, subtle scrollbars for carousels */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* DearFlip container sizing fix inside the reader card */
+.df-container { border-radius: 1rem; overflow: hidden; }

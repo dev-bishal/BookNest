@@ -1,0 +1,12 @@
+{
+  "title": "Aesop's Fables",
+  "author": "Aesop",
+  "category": "Literature",
+  "year": 2026,
+  "description": "Six beloved fables — the tortoise, the fox, the wolf and friends — each carrying a moral that still rings true today.",
+  "cover": "covers/aesops-fables.svg",
+  "pdf": "pdfs/aesops-fables.pdf",
+  "trending": true,
+  "featured": true,
+  "dateAdded": "2026-08-27"
+}

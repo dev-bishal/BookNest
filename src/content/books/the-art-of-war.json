@@ -1,0 +1,12 @@
+{
+  "title": "The Art of War",
+  "author": "Sun Tzu",
+  "category": "History",
+  "year": 2026,
+  "description": "An ancient Chinese military treatise on strategy, tactics and leadership — timeless lessons on winning without fighting.",
+  "cover": "covers/the-art-of-war.svg",
+  "pdf": "pdfs/the-art-of-war.pdf",
+  "trending": true,
+  "featured": true,
+  "dateAdded": "2026-08-25"
+}

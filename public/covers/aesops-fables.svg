@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="450" viewBox="0 0 300 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2e8b6a"/>
+      <stop offset="1" stop-color="#14523a"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="450" fill="url(#bg)"/>
+  <g fill="#ffe9a8" opacity="0.95">
+    <ellipse cx="150" cy="215" rx="46" ry="34"/>
+    <circle cx="192" cy="196" r="16"/>
+    <path d="M204 186 L212 172 L206 188 Z"/>
+    <path d="M184 186 L178 170 L190 186 Z"/>
+    <path d="M104 220 Q80 210 76 190 Q92 200 106 208 Z"/>
+    <circle cx="196" cy="193" r="2.5" fill="#14523a"/>
+  </g>
+  <text x="150" y="72" text-anchor="middle" font-family="Georgia, serif" font-size="34" font-weight="bold" fill="#fffbef" letter-spacing="1">AESOP'S</text>
+  <text x="150" y="110" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#ffe9a8" letter-spacing="3">FABLES</text>
+  <rect x="115" y="300" width="70" height="2" fill="#ffe9a8"/>
+  <text x="150" y="335" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#fffbef" letter-spacing="3">TIMELESS TALES</text>
+  <text x="150" y="420" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#c9e8d5" letter-spacing="2">ILLUSTRATED DEMO EDITION</text>
+</svg>

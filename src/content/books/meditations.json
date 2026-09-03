@@ -1,0 +1,12 @@
+{
+  "title": "Meditations",
+  "author": "Marcus Aurelius",
+  "category": "Literature",
+  "year": 2026,
+  "description": "The private reflections of a Roman emperor — a cornerstone of Stoic philosophy on discipline, perspective and inner calm.",
+  "cover": "covers/meditations.svg",
+  "pdf": "pdfs/meditations.pdf",
+  "trending": false,
+  "featured": true,
+  "dateAdded": "2026-08-22"
+}

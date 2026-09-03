@@ -1,0 +1,45 @@
+# Decap CMS — local editing workflow:
+#   1. npm run cms   (starts the decap proxy server on :8081)
+#   2. npm run dev   (starts the site)
+#   3. open http://localhost:5173/admin/
+# Edits are written straight to the files in this repo — commit & push to publish.
+backend:
+  name: github
+  repo: dev-bishal/MusicPlayer
+  branch: main
+  base_url: https://decap-oauth-bishal.vercel.app
+  auth_endpoint: api/auth
+
+local_backend: true
+
+media_folder: public/covers
+public_folder: covers
+
+collections:
+  - name: books
+    label: Books
+    label_singular: Book
+    folder: src/content/books
+    extension: json
+    format: json
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{title}} — {{author}}"
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: author, label: Author, widget: string }
+      - name: category
+        label: Category
+        widget: select
+        options: [Literature, Science, Business, History]
+      - { name: year, label: Year, widget: number, value_type: int, default: 2026 }
+      - { name: description, label: Description, widget: text, required: false }
+      - { name: cover, label: Cover image, widget: image, hint: "Portrait image, ideally 300x450 or larger" }
+      - name: pdf
+        label: PDF file path
+        widget: string
+        hint: "Put the PDF in public/pdfs/ and enter e.g. pdfs/my-book.pdf"
+      - { name: trending, label: Trending badge, widget: boolean, default: false }
+      - { name: featured, label: Featured on home, widget: boolean, default: true }
+      - { name: dateAdded, label: Date added, widget: datetime, format: "YYYY-MM-DD", time_format: false }
