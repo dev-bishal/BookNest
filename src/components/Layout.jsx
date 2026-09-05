@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
-import { CATEGORIES, books } from '../lib/books.js'
+import { CATEGORIES, books, filterCategories } from '../lib/books.js'
 import {
   BookIcon, ChevronDown, CompassIcon, GearIcon, GridIcon,
   HeartIcon, HomeIcon, MoonIcon, SearchIcon, SunIcon,
@@ -112,7 +112,7 @@ export default function Layout() {
               className="appearance-none rounded-full border border-line bg-card py-3 pl-5 pr-11 text-sm font-bold text-ink-soft shadow-card outline-none"
             >
               <option value="">All Category</option>
-              {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
+              {filterCategories.map((c) => <option key={c}>{c}</option>)}
             </select>
             <ChevronDown size={16} className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ink-soft" />
           </div>

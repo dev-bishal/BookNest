@@ -1,0 +1,8 @@
+{
+  "categories": [
+    { "name": "Literature" },
+    { "name": "Science" },
+    { "name": "Business" },
+    { "name": "History" }
+  ]
+}

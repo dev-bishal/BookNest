@@ -1,17 +1,19 @@
 # Decap CMS — local editing workflow:
 #   1. npm run cms   (starts the decap proxy server on :8081)
 #   2. npm run dev   (starts the site)
-#   3. open http://localhost:5173/admin/
+#   3. open http://localhost:5173/admin/index.html
 # Edits are written straight to the files in this repo — commit & push to publish.
 backend:
   name: github
-  repo: dev-bishal/MusicPlayer
+  repo: dev-bishal/PDFBooks
   branch: main
   base_url: https://decap-oauth-bishal.vercel.app
   auth_endpoint: api/auth
 
 local_backend: true
 
+# Default upload destination (covers). Fields that need somewhere else — the PDF
+# field below — override it with an absolute, repo-root-relative path.
 media_folder: public/covers
 public_folder: covers
 
@@ -29,17 +31,51 @@ collections:
     fields:
       - { name: title, label: Title, widget: string }
       - { name: author, label: Author, widget: string }
+      # Categories are edited in Settings → Categories, so this pulls the live list
+      # instead of hard-coding options that only a developer could change.
       - name: category
         label: Category
-        widget: select
-        options: [Literature, Science, Business, History]
+        widget: relation
+        collection: settings
+        file: categories
+        search_fields: ["categories.*.name"]
+        display_fields: ["categories.*.name"]
+        value_field: "categories.*.name"
+        hint: "Manage the list under Settings → Categories."
       - { name: year, label: Year, widget: number, value_type: int, default: 2026 }
       - { name: description, label: Description, widget: text, required: false }
-      - { name: cover, label: Cover image, widget: image, hint: "Portrait image, ideally 300x450 or larger" }
+      - name: cover
+        label: Cover image
+        widget: image
+        choose_url: false
+        media_folder: "/public/covers"
+        public_folder: "/covers"
+        hint: "Portrait image, ideally 300x450 or larger."
       - name: pdf
-        label: PDF file path
-        widget: string
-        hint: "Put the PDF in public/pdfs/ and enter e.g. pdfs/my-book.pdf"
-      - { name: trending, label: Trending badge, widget: boolean, default: false }
-      - { name: featured, label: Featured on home, widget: boolean, default: true }
+        label: PDF file
+        widget: file
+        choose_url: false
+        allow_multiple: false
+        media_folder: "/public/pdfs"
+        public_folder: "/pdfs"
+        hint: "Upload the book's PDF — it is stored in public/pdfs/."
+      - { name: trending, label: Trending badge, widget: boolean, default: false, required: false }
+      - { name: featured, label: Featured on home, widget: boolean, default: true, required: false }
       - { name: dateAdded, label: Date added, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+
+  - name: settings
+    label: Settings
+    files:
+      - name: categories
+        label: Categories
+        file: src/content/settings/categories.json
+        format: json
+        description: "Add, rename, reorder or remove the categories used by the site nav, the filters and the home page."
+        fields:
+          - name: categories
+            label: Categories
+            label_singular: Category
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { name: name, label: Name, widget: string }

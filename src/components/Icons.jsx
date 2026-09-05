@@ -89,3 +89,18 @@ export const BackIcon = (p) => <Icon {...p} d="M19 12H5m0 0 6-6m-6 6 6 6" />
 export const DownloadIcon = (p) => (
   <Icon {...p} d="M12 3v11m0 0 4-4m-4 4-4-4M4 17v2.5A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5V17" />
 )
+export const BookmarkIcon = (p) => (
+  <Icon {...p} d="M6.5 3.5h11a1 1 0 0 1 1 1v16l-6.5-4-6.5 4v-16a1 1 0 0 1 1-1Z" />
+)
+export const ClockIcon = (p) => (
+  <Icon {...p}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7v5.2l3.2 2" />
+  </Icon>
+)
+export const RestartIcon = (p) => (
+  <Icon {...p} d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4.5 4.5V11h6.5" />
+)
+export const TrashIcon = (p) => (
+  <Icon {...p} d="M4 6.5h16M9.5 6.5V4.5h5v2M6.5 6.5 7.4 20h9.2l.9-13.5" />
+)

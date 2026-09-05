@@ -51,8 +51,8 @@ export default function AllBooks() {
           <p className="mt-1 text-sm font-semibold text-ink-soft">Try clearing the search or filters.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 justify-items-center gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {slice.map((b) => <BookCard key={b.slug} book={b} className="w-full max-w-48" />)}
+        <div className="grid grid-cols-2 justify-items-center gap-x-5 gap-y-7 sm:grid-cols-3 lg:grid-cols-4">
+          {slice.map((b) => <BookCard key={b.slug} book={b} className="w-full max-w-56" />)}
         </div>
       )}
 
