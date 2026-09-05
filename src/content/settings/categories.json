@@ -1,8 +1,19 @@
 {
   "categories": [
-    { "name": "Literature" },
-    { "name": "Science" },
-    { "name": "Business" },
-    { "name": "History" }
+    {
+      "name": "Literature"
+    },
+    {
+      "name": "Science"
+    },
+    {
+      "name": "Business"
+    },
+    {
+      "name": "History"
+    },
+    {
+      "name": "Self Help"
+    }
   ]
 }

@@ -11,6 +11,8 @@ backend:
   auth_endpoint: api/auth
 
 local_backend: true
+# local_backend:
+#  url: http://localhost:8081/api/v1
 
 # Default upload destination (covers). Fields that need somewhere else — the PDF
 # field below — override it with an absolute, repo-root-relative path.
@@ -47,14 +49,14 @@ collections:
       - name: cover
         label: Cover image
         widget: image
-        choose_url: false
+        choose_url: true
         media_folder: "/public/covers"
         public_folder: "/covers"
         hint: "Portrait image, ideally 300x450 or larger."
       - name: pdf
         label: PDF file
         widget: file
-        choose_url: false
+        choose_url: true
         allow_multiple: false
         media_folder: "/public/pdfs"
         public_folder: "/pdfs"
