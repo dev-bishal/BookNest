@@ -12,7 +12,10 @@ export const CATEGORIES = (categoriesFile.categories ?? [])
 
 /** Prefix a public/ asset path with the deploy base (GitHub Pages subpath safe). */
 export function asset(path) {
-  return import.meta.env.BASE_URL + String(path ?? '').replace(/^\//, '')
+  if(!path.includes("http"))
+    return import.meta.env.BASE_URL + String(path ?? '').replace(/^\//, '')
+  else
+    return String(path ?? '').replace(/^\//, '')
 }
 
 export const books = Object.entries(modules)
