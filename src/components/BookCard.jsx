@@ -5,6 +5,8 @@ import { BookmarkIcon, FlameIcon, StarIcon } from './Icons.jsx'
 /**
  * Cover card matching the mockup: star badge, Trending pill, gradient title overlay.
  * `bookmark` is a history entry — when present the card shows reading progress.
+ * Uploads carry their own `href`, and may have no cover if PDF.js could not
+ * render a thumbnail for them.
  */
 export default function BookCard({ book, bookmark, className = '' }) {
   const page = bookmark?.page > 1 ? bookmark.page : null
@@ -14,14 +16,20 @@ export default function BookCard({ book, bookmark, className = '' }) {
 
   return (
     <Link
-      to={`/book/${book.slug}`}
+      to={book.href ?? `/book/${book.slug}`}
       className={`group relative block w-48 shrink-0 overflow-hidden rounded-2xl shadow-card transition-transform duration-300 hover:-translate-y-1.5 sm:w-56 ${className}`}
     >
-      <img
-        src={asset(book.cover)}
-        alt={`${book.title} cover`}
-        className="aspect-[2/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-      />
+      {book.cover ? (
+        <img
+          src={asset(book.cover)}
+          alt={`${book.title} cover`}
+          className="aspect-[2/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <span className="grid aspect-[2/3] w-full place-items-center bg-sky-soft text-6xl font-black text-sky-deep">
+          {book.title?.trim().charAt(0).toUpperCase() || '?'}
+        </span>
+      )}
 
       {/* top badges */}
       <div className="absolute inset-x-2.5 top-2.5 flex items-start justify-between">

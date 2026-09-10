@@ -9,6 +9,7 @@ A PDF book library with a flipbook reader, built with **React + Vite + Tailwind 
 | `/` | Home — continue reading, latest added, and a shelf of recently added books per category |
 | `/books` | All books — search, category/year filters, pagination |
 | `/book/:slug` | Reader — DearFlip flipbook, resumes at your last page |
+| `/uploads/:id` | Reader for a PDF the visitor picked from their own device |
 
 Clean URLs (no #) — the build copies `index.html` to `404.html` so GitHub Pages serves the app for deep links and refreshes.
 
@@ -69,6 +70,29 @@ book still uses it, so no book becomes unreachable.
 ```
 
 The site picks up every JSON file in that folder at build time — no registry to update.
+
+## Reading your own PDFs
+
+The **Upload** button in the header opens a file picker (drag and drop works too)
+and then opens the PDF straight in the flipbook. There is no upload in the network
+sense: no server, no database, no CDN — the file is read in the browser and never
+leaves the device, so any size is allowed as long as the browser has room for it.
+
+Each upload is stored in two places on that device:
+
+- the PDF itself in **IndexedDB** (`booknest` → `uploads`), keyed by a generated id;
+- a small record in `localStorage` under `bn-uploads` — title, author, page count,
+  and a JPEG thumbnail of page 1 rendered with the copy of PDF.js that ships with
+  DearFlip. Keeping it in `localStorage` lets the shelves render without waiting on IO.
+
+Uploads appear in a **Your Uploads** shelf on the home page and get bookmarked in
+`bn-history` exactly like catalogue books, under the slug `upload:<id>`, so they
+reopen on the page you left off. The trash button on a card removes all three: the
+file, the record and the bookmark.
+
+Uploads are per-browser. The same link opened on another device — or after the site
+data is cleared — shows an "Upload not found" page rather than a broken viewer.
+Downloading stays switched off for uploads too, so a reader still only reads.
 
 ## Deployment
 

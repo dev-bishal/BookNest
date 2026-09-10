@@ -3,8 +3,9 @@ import { Link, NavLink, Outlet, useLocation, useNavigate, useSearchParams } from
 import { CATEGORIES, books, filterCategories } from '../lib/books.js'
 import {
   BookIcon, ChevronDown, CompassIcon, GearIcon, GridIcon,
-  HeartIcon, HomeIcon, MoonIcon, SearchIcon, SunIcon,
+  HeartIcon, HomeIcon, MoonIcon, SearchIcon, SunIcon, UploadIcon,
 } from './Icons.jsx'
+import UploadModal from './UploadModal.jsx'
 
 const YEARS = [...new Set(books.map((b) => b.year))].sort((a, b) => b - a)
 
@@ -33,6 +34,7 @@ export default function Layout() {
   const [params] = useSearchParams()
   const [query, setQuery] = useState(params.get('q') ?? '')
   const [dark, setDark] = useState(() => localStorage.getItem('bn-theme') === 'dark')
+  const [uploadOpen, setUploadOpen] = useState(false)
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark)
@@ -59,9 +61,14 @@ export default function Layout() {
       <div className="relative mx-auto w-full rounded-none bg-card shadow-float sm:rounded-[2.5rem]">
         {/* ===== Header ===== */}
         <header className="flex flex-wrap items-center gap-4 px-6 pt-6 sm:px-10">
-          <Link to="/" className="text-2xl font-black tracking-[0.2em] text-ink">
-            BOOK<span className="text-sky-deep">NEST</span>
-          </Link>
+          <div className="flex flex-col">
+            <Link to="/" className="text-2xl font-black tracking-[0.2em] text-ink">
+              BOOK<span className="text-sky-deep">NEST</span>
+            </Link>
+            <Link to="https://bishal-biswas.github.io" className="text-lg font-black tracking-[0.2em] text-ink">
+              by <span className="text-sky-deep">Bishal Biswas</span>
+            </Link>
+          </div>
 
           <nav className="order-3 flex w-full flex-wrap justify-center gap-1 sm:order-none sm:mx-auto sm:w-auto">
             {CATEGORIES.map((cat) => (
@@ -80,6 +87,14 @@ export default function Layout() {
           </nav>
 
           <div className="ml-auto flex items-center gap-3 sm:ml-0">
+            <button
+              onClick={() => setUploadOpen(true)}
+              title="Read a PDF from this device"
+              className="flex items-center gap-2 rounded-full bg-sky-deep px-4 py-2.5 text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
+            >
+              <UploadIcon size={17} />
+              <span className="hidden sm:inline">Upload</span>
+            </button>
             <button
               title="Toggle dark mode"
               onClick={() => setDark((d) => !d)}
@@ -148,6 +163,8 @@ export default function Layout() {
           </main>
         </div>
       </div>
+
+      {uploadOpen && <UploadModal onClose={() => setUploadOpen(false)} />}
 
       <p className="px-4 py-4 text-center text-xs font-semibold text-white/80">
         BookNest · a demo PDF library — content managed with Decap CMS, flipbooks by DearFlip
