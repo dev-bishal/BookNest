@@ -12,10 +12,11 @@ export const CATEGORIES = (categoriesFile.categories ?? [])
 
 /** Prefix a public/ asset path with the deploy base (GitHub Pages subpath safe). */
 export function asset(path) {
-  if(!path.includes("http"))
-    return import.meta.env.BASE_URL + String(path ?? '').replace(/^\//, '')
-  else
-    return String(path ?? '').replace(/^\//, '')
+  const p = String(path ?? '')
+  // Remote covers, and the inline thumbnails generated for uploaded PDFs, are
+  // already complete URLs — only repo-relative paths need the base prefix.
+  if (/^(?:https?:|data:|blob:)/i.test(p)) return p
+  return import.meta.env.BASE_URL + p.replace(/^\//, '')
 }
 
 export const books = Object.entries(modules)

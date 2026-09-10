@@ -104,3 +104,10 @@ export const RestartIcon = (p) => (
 export const TrashIcon = (p) => (
   <Icon {...p} d="M4 6.5h16M9.5 6.5V4.5h5v2M6.5 6.5 7.4 20h9.2l.9-13.5" />
 )
+export const UploadIcon = (p) => (
+  <Icon {...p} d="M12 16V4m0 0 4 4m-4-4-4 4M4 17v2.5A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5V17" />
+)
+export const CloseIcon = (p) => <Icon {...p} d="m6 6 12 12M18 6 6 18" />
+export const FileIcon = (p) => (
+  <Icon {...p} d="M13.5 3H7a1.5 1.5 0 0 0-1.5 1.5v15A1.5 1.5 0 0 0 7 21h10a1.5 1.5 0 0 0 1.5-1.5V8m-5-5 5 5m-5-5v5h5" />
+)

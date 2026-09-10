@@ -5,6 +5,7 @@ import Layout from './components/Layout.jsx'
 import Home from './pages/Home.jsx'
 import AllBooks from './pages/AllBooks.jsx'
 import Reader from './pages/Reader.jsx'
+import UploadReader from './pages/UploadReader.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/" element={<Home />} />
           <Route path="/books" element={<AllBooks />} />
           <Route path="/book/:slug" element={<Reader />} />
+          <Route path="/uploads/:id" element={<UploadReader />} />
         </Route>
       </Routes>
     </BrowserRouter>

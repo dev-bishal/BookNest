@@ -1,9 +1,11 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { books, booksInCategory, getBook, usedCategories } from '../lib/books.js'
-import { clearHistory, useHistory } from '../lib/history.js'
+import { books, booksInCategory, usedCategories } from '../lib/books.js'
+import { clearHistory, getEntry, useHistory } from '../lib/history.js'
+import { removeUpload, resolveBook, toBook, uploadSlug, useUploads } from '../lib/uploads.js'
 import BookCard from '../components/BookCard.jsx'
-import { ChevronLeft, ChevronRight, ClockIcon, TrashIcon } from '../components/Icons.jsx'
+import UploadModal from '../components/UploadModal.jsx'
+import { ChevronLeft, ChevronRight, ClockIcon, TrashIcon, UploadIcon } from '../components/Icons.jsx'
 
 const PER_RAIL = 12
 
@@ -73,16 +75,67 @@ function BrowseTile({ to, label }) {
   )
 }
 
+/** Same tile shape as BrowseTile, but it opens the upload dialog instead. */
+function UploadTile({ onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className="grid w-48 shrink-0 place-items-center gap-2 rounded-2xl border-2 border-dashed border-line px-4 py-10 text-center text-sm font-extrabold text-ink-soft transition-colors hover:border-sky-deep hover:text-sky-deep sm:w-56"
+    >
+      <UploadIcon size={22} />
+      Upload a PDF
+    </button>
+  )
+}
+
+/**
+ * An upload card with its own remove control. The card is a link, so the button
+ * has to sit beside it rather than inside it.
+ */
+function UploadCard({ book, bookmark }) {
+  const remove = () => {
+    if (confirm(`Remove “${book.title}” from this device?`)) removeUpload(book.id)
+  }
+  return (
+    <div className="relative shrink-0">
+      <BookCard book={book} bookmark={bookmark} />
+      <button
+        onClick={remove}
+        title="Remove from this device"
+        aria-label={`Remove ${book.title}`}
+        className="absolute right-2.5 top-11 grid size-8 place-items-center rounded-full bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-red-500"
+      >
+        <TrashIcon size={15} />
+      </button>
+    </div>
+  )
+}
+
 export default function Home() {
   const history = useHistory()
+  const uploads = useUploads()
+  const [uploadOpen, setUploadOpen] = useState(false)
 
-  // History entries whose book still exists (books can be deleted in the CMS).
+  // History entries whose book still exists — catalogue books can be deleted in
+  // the CMS, and uploads can be removed from the device.
   const continueReading = history
-    .map((entry) => ({ entry, book: getBook(entry.slug) }))
+    .map((entry) => ({ entry, book: resolveBook(entry.slug) }))
     .filter(({ book }) => book)
 
   return (
     <div className="mt-8">
+      {uploads.length > 0 && (
+        <Rail
+          title="Your Uploads"
+          icon={<UploadIcon size={20} className="text-sky-deep" />}
+        >
+          {uploads.map((meta) => (
+            <UploadCard key={meta.id} book={toBook(meta)} bookmark={getEntry(uploadSlug(meta.id))} />
+          ))}
+          <UploadTile onClick={() => setUploadOpen(true)} />
+        </Rail>
+      )}
+
       {continueReading.length > 0 && (
         <Rail
           title="Continue Reading"
@@ -138,6 +191,8 @@ export default function Home() {
           </p>
         </div>
       )}
+
+      {uploadOpen && <UploadModal onClose={() => setUploadOpen(false)} />}
     </div>
   )
 }
