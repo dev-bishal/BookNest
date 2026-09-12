@@ -2,6 +2,8 @@
 
 A PDF book library with a flipbook reader, built with **React + Vite + Tailwind CSS 4**, content managed with **Decap CMS**, flipbooks powered by **DearFlip**, and deployed to **GitHub Pages**.
 
+![Screenshot of Book Nest](./public/Screenshot 2026-09-12 234655.png)
+
 ## Pages
 
 | Route | Page |
